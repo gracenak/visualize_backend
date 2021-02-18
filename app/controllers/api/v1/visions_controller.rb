@@ -14,6 +14,6 @@ class Api::V1::VisionsController < ApplicationController
     end
 
     def vision_params
-        params.require(:vision).permit(:title, :description, :image_url, :user_id)
+        params.require(:vision).permit(:title, :description, :image_url, :theme_id)
     end
 end
