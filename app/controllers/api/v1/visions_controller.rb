@@ -1,5 +1,5 @@
 class Api::V1::VisionsController < ApplicationController
-    before_action :set_vision, only: [:update]
+    # before_action :set_vision, only: [:update]
 
     def index
         visions = Vision.all
@@ -16,10 +16,11 @@ class Api::V1::VisionsController < ApplicationController
     end
 
     def update
-        if @vision.update(vision_params)
-            render json: @vision, status:accepted
+        vision = Vision.find(params[:id])
+        if vision.update(vision_params)
+            render json: vision, status:accepted
         else
-            render json: {errors: @vision.errors.full_messages}, status: :unprocessible_entity
+            render json: {errors: vision.errors.full_messages}, status: :unprocessible_entity
         end
     end
 
@@ -31,9 +32,9 @@ class Api::V1::VisionsController < ApplicationController
 
     private
 
-    def set_vision
-        @vision = Vision.find_by(params[:id])
-    end
+    # def set_vision
+    #     @vision = Vision.find_by(params[:id])
+    # end
 
     def vision_params
         params.require(:vision).permit(:title, :description, :image_url, :theme_id)
