@@ -15,7 +15,7 @@ class Api::V1::VisionsController < ApplicationController
     end
 
     def destroy
-        vision = Vision.find_by(params[:id])
+        vision = Vision.find(params[:id])
         vision.delete
         render json: vision
     end
