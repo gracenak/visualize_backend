@@ -1,7 +1,7 @@
 class Api::V1::VisionsController < ApplicationController
 
     def index
-        visions = Vision.all
+        visions = Vision.all.order_by_created_at
         render json: VisionSerializer.new(visions)
     end
 
@@ -9,8 +9,6 @@ class Api::V1::VisionsController < ApplicationController
         vision = Vision.new(vision_params)
         if vision.save
             render json: VisionSerializer.new(vision), status: :accepted
-        else
-            render json: {errors: vision.errors.full_messages}, status: :unprocessible_entity
         end
     end
 
